@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Enquiry - PPC Construction</title>
+  <meta name="description" content="Start your construction or renovation project with PPC Construction. Fill out our enquiry form and we'll reach out within 24 hours.">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation (injected by js/components.js) -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Page Top Spacer -->
+  <div class="page-top"></div>
+
+  <!-- Enquiry Hero -->
+  <section class="section-padding bg-dark-gradient">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h1 class="section-title text-white">START YOUR PROJECT</h1>
+          <div class="section-divider"></div>
+          <p class="lead" style="color: rgba(255, 255, 255, 0.9);">
+            Take the first step towards your next construction project. Complete the form below and 
+            our team will reach out within 24 hours to discuss your project.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enquiry Form -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <form>
+            <!-- Personal Information -->
+            <div class="mb-5">
+              <h2 class="h4 mb-4">Personal Information</h2>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName" class="form-label">First Name *</label>
+                  <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lastName" class="form-label">Last Name *</label>
+                  <input type="text" class="form-control" id="lastName" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label">Email *</label>
+                  <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="phone" class="form-label">Phone *</label>
+                  <input type="tel" class="form-control" id="phone" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="mb-5">
+              <h2 class="h4 mb-4">Project Details</h2>
+              
+              <div class="mb-3">
+                <label for="projectType" class="form-label">Project Type *</label>
+                <select class="form-select" id="projectType" required>
+                  <option value="">Select a project type</option>
+                  <option value="residential">New Residential Build</option>
+                  <option value="commercial">New Commercial Build</option>
+                  <option value="renovation">Full Renovation</option>
+                  <option value="extension">Extension / Addition</option>
+                  <option value="fit-out">Fit-Out</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="address" class="form-label">Property Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Street address, City, State, ZIP">
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="budget" class="form-label">Estimated Budget</label>
+                  <select class="form-select" id="budget">
+                    <option value="">Select budget range</option>
+                    <option value="10-25k">$10,000 - $25,000</option>
+                    <option value="25-50k">$25,000 - $50,000</option>
+                    <option value="50-100k">$50,000 - $100,000</option>
+                    <option value="100k+">$100,000+</option>
+                    <option value="flexible">Flexible</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="timeline" class="form-label">Desired Timeline</label>
+                  <select class="form-select" id="timeline">
+                    <option value="">Select timeline</option>
+                    <option value="asap">As soon as possible</option>
+                    <option value="1-3">1-3 months</option>
+                    <option value="3-6">3-6 months</option>
+                    <option value="6+">6+ months</option>
+                    <option value="flexible">Flexible</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label">Project Description *</label>
+                <textarea class="form-control" id="description" rows="6" required placeholder="Please describe your project, including any specific requirements, design preferences, or concerns..."></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="referral" class="form-label">How did you hear about us?</label>
+                <select class="form-select" id="referral">
+                  <option value="">Select an option</option>
+                  <option value="search">Search Engine</option>
+                  <option value="social">Social Media</option>
+                  <option value="referral">Referral</option>
+                  <option value="advertisement">Advertisement</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="mb-5">
+              <h2 class="h4 mb-4">Preferences</h2>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="consultationCheck">
+                <label class="form-check-label text-muted" for="consultationCheck">
+                  I would like to schedule an in-person consultation
+                </label>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="updatesCheck">
+                <label class="form-check-label text-muted" for="updatesCheck">
+                  I would like to receive updates about design trends and promotions
+                </label>
+              </div>
+            </div>
+
+            <div class="pt-3">
+              <button type="submit" class="btn-primary-custom w-100">SUBMIT ENQUIRY</button>
+              <p class="text-muted text-center small mt-3 mb-0">
+                By submitting this form, you agree to our privacy policy and terms of service.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Happens Next -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title">What Happens Next?</h2>
+      <div class="section-divider mb-5"></div>
+      
+      <div class="row">
+        <div class="col-md-4 mb-4 text-center">
+          <div class="process-step mb-3">1</div>
+          <h3 class="h5 mb-3">We Review</h3>
+          <p class="text-muted small">Our team carefully reviews your enquiry and project requirements</p>
+        </div>
+        
+        <div class="col-md-4 mb-4 text-center">
+          <div class="process-step mb-3">2</div>
+          <h3 class="h5 mb-3">We Connect</h3>
+          <p class="text-muted small">We'll reach out within 24 hours to schedule your consultation</p>
+        </div>
+        
+        <div class="col-md-4 mb-4 text-center">
+          <div class="process-step mb-3">3</div>
+          <h3 class="h5 mb-3">We Create</h3>
+          <p class="text-muted small">Together, we'll transform your vision into reality</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (injected by js/components.js) -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Shared Components -->
+  <script src="js/components.js"></script>
+</body>
+</html>
