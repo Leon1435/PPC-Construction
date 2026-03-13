@@ -25,7 +25,7 @@
 
   const headConfig = {
     bootstrapHref: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-    customCssHref: 'styles.css',
+    customCssHref: 'style/styles.css',
   };
 
   /* ──────────────────────────────────────────
