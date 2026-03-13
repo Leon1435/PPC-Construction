@@ -1,10 +1,74 @@
 /**
  * PPC Construction – Shared Components
- * Injects the navbar and footer into every page automatically.
- * To update nav or footer, edit ONLY this file.
+ * Injects head (title, meta, CSS), navbar, and footer into every page.
+ * To update head, nav, or footer, edit ONLY this file.
  */
 
 (function () {
+  /* ──────────────────────────────────────────
+     DETECT ACTIVE PAGE (used for head and nav)
+  ────────────────────────────────────────── */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  /* ──────────────────────────────────────────
+     PAGE HEAD CONFIG (title + meta description per page)
+  ────────────────────────────────────────── */
+  const pageMeta = {
+    'index.html':    { title: 'PPC Construction - Quality Construction Services',           description: 'PPC Construction delivers premium residential and commercial construction and renovation services. From concept to completion, we build with quality and precision.' },
+    'services.html': { title: 'Our Services - PPC Construction',                             description: 'Explore our full range of construction services including residential builds, commercial projects, renovations, and design consultation.' },
+    'our-work.html': { title: 'Our Work - PPC Construction',                                 description: 'Browse our portfolio of completed residential and commercial construction projects by PPC Construction.' },
+    'about-us.html': { title: 'About Us - PPC Construction',                                 description: 'Learn about PPC Construction — our story, values, and the team behind our award-winning construction projects.' },
+    'guide.html':    { title: 'Construction Guide - PPC Construction',                       description: 'Your comprehensive guide to planning and executing a successful construction or renovation project with PPC Construction.' },
+    'contact.html':  { title: 'Contact - PPC Construction',                                   description: 'Get in touch with PPC Construction. We\'re here to answer your questions and discuss your project.' },
+    'enquiry.html':  { title: 'Project Enquiry - PPC Construction',                         description: 'Start your construction or renovation project with PPC Construction. Fill out our enquiry form and we\'ll reach out within 24 hours.' },
+  };
+
+  const headConfig = {
+    bootstrapHref: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+    customCssHref: 'styles.css',
+  };
+
+  /* ──────────────────────────────────────────
+     INJECT HEAD (run immediately)
+  ────────────────────────────────────────── */
+  function injectHead() {
+    const meta = pageMeta[currentPage] || pageMeta['index.html'];
+    const head = document.head;
+
+    document.title = meta.title;
+
+    let desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', meta.description);
+    else {
+      desc = document.createElement('meta');
+      desc.name = 'description';
+      desc.content = meta.description;
+      head.appendChild(desc);
+    }
+
+    if (!document.querySelector('meta[name="viewport"]')) {
+      const vp = document.createElement('meta');
+      vp.name = 'viewport';
+      vp.content = 'width=device-width, initial-scale=1.0';
+      head.appendChild(vp);
+    }
+
+    if (!document.querySelector('link[href*="bootstrap"]')) {
+      const linkB = document.createElement('link');
+      linkB.rel = 'stylesheet';
+      linkB.href = headConfig.bootstrapHref;
+      head.appendChild(linkB);
+    }
+
+    if (!document.querySelector('link[href="' + headConfig.customCssHref + '"]')) {
+      const linkC = document.createElement('link');
+      linkC.rel = 'stylesheet';
+      linkC.href = headConfig.customCssHref;
+      head.appendChild(linkC);
+    }
+  }
+  injectHead();
+
   /* ──────────────────────────────────────────
      NAV LINKS CONFIG
      Add, remove, or rename links here.
@@ -31,11 +95,6 @@
     email:   'info@ppcconstruction.com',
     year:    new Date().getFullYear(),
   };
-
-  /* ──────────────────────────────────────────
-     DETECT ACTIVE PAGE
-  ────────────────────────────────────────── */
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
   /* ──────────────────────────────────────────
      BUILD NAVBAR
