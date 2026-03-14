@@ -89,6 +89,7 @@
   ────────────────────────────────────────── */
   const company = {
     name:    'PPC CONSTRUCTION',
+    logo:    'images/company-logo.png',
     tagline: 'Building quality structures, enriching communities. Your trusted partner for exceptional construction services.',
     address: '123 Construction Ave<br>Your City, State 00000',
     phone:   '(000) 000-0000',
@@ -111,7 +112,9 @@
     return `
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-          <a class="navbar-brand" href="index.html">${company.name}</a>
+          <a class="navbar-brand" href="index.html">
+            <img src="${company.logo}" alt="${company.name}" class="navbar-logo">
+          </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                   aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -140,8 +143,10 @@
 
             <!-- Brand -->
             <div class="col-md-3 mb-4">
-              <h3 class="footer-brand">${company.name}</h3>
-              <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">${company.tagline}</p>
+              <a href="index.html" class="footer-logo-link">
+                <img src="${company.logo}" alt="${company.name}" class="footer-logo">
+              </a>
+              <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem; margin-top: 1rem;">${company.tagline}</p>
             </div>
 
             <!-- Quick Links -->

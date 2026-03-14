@@ -1,9 +1,10 @@
 :root {
-  --primary-color: #10b981;
-  --primary-hover: #059669;
-  --dark-bg: #0f172a;
-  --dark-bg-light: #1e293b;
-  --text-dark: #0f172a;
+  /* PPC Construction brand (business card theme) */
+  --primary-color: #E60000;
+  --primary-hover: #c20000;
+  --dark-bg: #363636;
+  --dark-bg-light: #2b2b2b;
+  --text-dark: #363636;
 }
 
 * {
@@ -29,10 +30,17 @@ body {
 }
 
 .navbar-brand {
-  color: var(--primary-color) !important;
-  font-size: 1.25rem;
-  letter-spacing: 0.1em;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.navbar-logo {
+  height: 3.75rem;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  display: block;
 }
 
 .navbar-nav .nav-link {
@@ -67,24 +75,25 @@ body {
   padding-top: 80px;
 }
 
-.hero-title {
-  font-size: 4rem;
-  letter-spacing: 0.1em;
+.hero-logo {
+  max-height: 18rem;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin-bottom: 2rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-tagline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   color: #fff;
-  margin-bottom: 1rem;
-}
-
-.hero-company {
-  font-size: 4.5rem;
-  letter-spacing: 0.1em;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-}
-
-.hero-subtitle {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.05em;
+  line-height: 1.5;
+  margin: 0;
+  text-transform: uppercase;
 }
 
 /* Section Styling */
@@ -157,7 +166,7 @@ body {
 .project-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(16, 185, 129, 0.8), transparent);
+  background: linear-gradient(to top, rgba(230, 0, 0, 0.8), transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,6 +217,19 @@ body {
 .footer h3, .footer h4 {
   color: #fff;
   margin-bottom: 1rem;
+}
+
+.footer-logo-link {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo {
+  height: 2.5rem;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  display: block;
 }
 
 .footer-brand {
@@ -262,7 +284,7 @@ body {
 .form-control:focus,
 .form-select:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(230, 0, 0, 0.25);
 }
 
 /* Filter Buttons */
@@ -288,7 +310,7 @@ body {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  background-color: rgba(16, 185, 129, 0.1);
+  background-color: rgba(230, 0, 0, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -310,12 +332,13 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.5rem;
+  .hero-logo {
+    max-height: 12rem;
   }
-  
-  .hero-company {
-    font-size: 3rem;
+
+  .hero-tagline {
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
   }
   
   .section-title {
