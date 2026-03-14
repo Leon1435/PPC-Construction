@@ -21,6 +21,7 @@
     'guide.html':    { title: 'Construction Guide - PPC Construction',                       description: 'Your comprehensive guide to planning and executing a successful construction or renovation project with PPC Construction.' },
     'contact.html':  { title: 'Contact - PPC Construction',                                   description: 'Get in touch with PPC Construction. We\'re here to answer your questions and discuss your project.' },
     'enquiry.html':  { title: 'Project Enquiry - PPC Construction',                         description: 'Start your construction or renovation project with PPC Construction. Fill out our enquiry form and we\'ll reach out within 24 hours.' },
+    'privacy-policy.html': { title: 'Privacy Policy - PPC Construction',                    description: 'Privacy Policy for PPC Construction. How we collect, use, and protect your personal information.' },
   };
 
   const headConfig = {
@@ -193,7 +194,7 @@
                 <p class="mb-0">&copy; ${company.year} PPC Construction. All rights reserved.</p>
               </div>
               <div class="col-md-6 text-center text-md-end">
-                <a href="#" class="me-3">Privacy Policy</a>
+                <a href="privacy-policy.html" class="me-3">Privacy Policy</a>
               </div>
             </div>
           </div>
