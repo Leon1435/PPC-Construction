@@ -205,5 +205,12 @@
 
     if (navSlot)    navSlot.outerHTML    = buildNavbar();
     if (footerSlot) footerSlot.outerHTML = buildFooter();
+
+    document.documentElement.classList.remove('ppc-loading');
   });
+
+  /* Fallback: show page if script runs late or placeholders missing */
+  setTimeout(function () {
+    document.documentElement.classList.remove('ppc-loading');
+  }, 2000);
 })();
