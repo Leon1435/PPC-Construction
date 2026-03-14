@@ -8,7 +8,8 @@
   /* ──────────────────────────────────────────
      DETECT ACTIVE PAGE (used for head and nav)
   ────────────────────────────────────────── */
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const pathSegment = (window.location.pathname.split('/').filter(Boolean).pop() || '').toLowerCase();
+  const currentPage = pathSegment === '' ? 'index.html' : (pathSegment.endsWith('.html') ? pathSegment : pathSegment + '.html');
 
   /* ──────────────────────────────────────────
      PAGE HEAD CONFIG (title + meta description per page)
@@ -48,36 +49,14 @@
       head.appendChild(desc);
     }
 
-    if (!document.querySelector('meta[name="viewport"]')) {
-      const vp = document.createElement('meta');
-      vp.name = 'viewport';
-      vp.content = 'width=device-width, initial-scale=1.0';
-      head.appendChild(vp);
-    }
-
-    if (!document.querySelector('link[href*="bootstrap"]')) {
-      const linkB = document.createElement('link');
-      linkB.rel = 'stylesheet';
-      linkB.href = headConfig.bootstrapHref;
-      head.appendChild(linkB);
-    }
-
-    if (!document.querySelector('link[href="' + headConfig.customCssHref + '"]')) {
-      const linkC = document.createElement('link');
-      linkC.rel = 'stylesheet';
-      linkC.href = headConfig.customCssHref;
-      head.appendChild(linkC);
-    }
-
     if (headConfig.faviconHref && !document.querySelector('link[rel="icon"]')) {
       const isIco = headConfig.faviconHref.indexOf('.ico') !== -1;
       const linkF = document.createElement('link');
       linkF.rel = 'icon';
       linkF.href = headConfig.faviconHref;
       linkF.type = isIco ? 'image/x-icon' : 'image/png';
-      linkF.sizes = '32x32';  /* Hint: use a 32x32 or 64x64 image for a sharper tab icon */
+      linkF.sizes = '32x32';
       head.appendChild(linkF);
-      /* Apple touch icon (e.g. when saving to home screen) – same image, looks bigger there */
       const linkA = document.createElement('link');
       linkA.rel = 'apple-touch-icon';
       linkA.href = headConfig.faviconHref;
@@ -119,7 +98,7 @@
   ────────────────────────────────────────── */
   function buildNavbar() {
     const liItems = navLinks.map(link => {
-      const isActive = currentPage === link.href ? ' active' : '';
+      const isActive = (currentPage === link.href || currentPage === link.href.toLowerCase()) ? ' active' : '';
       return `
         <li class="nav-item">
           <a class="nav-link${isActive}" href="${link.href}">${link.name}</a>
@@ -189,14 +168,13 @@
                 <a href="#" class="social-icon" aria-label="Facebook">
                   <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
                 </a>
-                <a href="#" class="social-icon" aria-label="Instagram">
-                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <a href="#" class="social-icon social-icon-outline" aria-label="Instagram">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
                 <a href="#" class="social-icon" aria-label="LinkedIn">
                   <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
                 </a>
               </div>
-              <a href="enquiry.html" class="btn-primary-custom">START PROJECT</a>
             </div>
 
           </div>

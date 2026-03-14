@@ -288,6 +288,15 @@ body {
   stroke: #fff;
 }
 
+.social-icon-outline svg {
+  fill: none !important;
+}
+
+.social-icon:hover.social-icon-outline svg {
+  fill: none !important;
+  stroke: #fff;
+}
+
 /* Form Styling */
 .form-label {
   font-size: 0.875rem;
