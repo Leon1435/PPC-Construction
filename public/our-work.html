@@ -18,7 +18,7 @@
       <h1 class="section-title">PORTFOLIO</h1>
       <div class="section-divider"></div>
       <p class="text-center text-muted lead col-lg-8 mx-auto">
-        Explore a curated collection of the projects we've passionately designed and built.
+        Before & after renovations, shoplot projects, residential renovations, and interior design transformations.
       </p>
     </div>
   </section>
@@ -26,10 +26,12 @@
   <!-- Filter Buttons -->
   <section class="pb-4 bg-white">
     <div class="container">
-      <div class="text-center">
+      <div class="text-center flex-wrap d-flex justify-content-center gap-2">
         <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+        <button class="filter-btn" onclick="filterProjects('before-after')">Before & After</button>
+        <button class="filter-btn" onclick="filterProjects('shoplot')">Shoplot</button>
         <button class="filter-btn" onclick="filterProjects('residential')">Residential</button>
-        <button class="filter-btn" onclick="filterProjects('commercial')">Commercial</button>
+        <button class="filter-btn" onclick="filterProjects('interior')">Interior Design</button>
       </div>
     </div>
   </section>
@@ -38,98 +40,98 @@
   <section class="pb-5 bg-white">
     <div class="container">
       <div class="row" id="projectsGrid">
-        <!-- Project 1 -->
+        <!-- Project 1 - Before & After -->
+        <div class="col-md-6 mb-4 project-item" data-category="before-after">
+          <div class="project-card">
+            <div class="project-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1749704647283-3ad79f4acc6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVuJTIwcmVub3ZhdGlvbiUyMGludGVyaW9yfGVufDF8fHx8MTc3Mjg4MDUxOHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Before and After Renovation" class="project-image">
+              <div class="project-overlay">
+                <span class="text-white display-6" style="letter-spacing: 0.15em;">BEFORE & AFTER</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Before & After Renovation</h3>
+              <p class="text-muted">Complete transformation from concept to completion</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 - Shoplot -->
+        <div class="col-md-6 mb-4 project-item" data-category="shoplot">
+          <div class="project-card">
+            <div class="project-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1669387448840-610c588f003d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBsaXZpbmclMjByb29tJTIwaW50ZXJpb3IlMjBkZXNpZ258ZW58MXx8fHwxNzcyNzk3OTU4fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Shoplot Renovation" class="project-image">
+              <div class="project-overlay">
+                <span class="text-white display-6" style="letter-spacing: 0.15em;">SHOPLOT</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Shoplot Renovation Project</h3>
+              <p class="text-muted">Commercial shoplot redesign and build-out</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 - Residential -->
         <div class="col-md-6 mb-4 project-item" data-category="residential">
           <div class="project-card">
             <div class="project-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1749704647283-3ad79f4acc6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVuJTIwcmVub3ZhdGlvbiUyMGludGVyaW9yfGVufDF8fHx8MTc3Mjg4MDUxOHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Modern Kitchen Renovation" class="project-image">
+              <img src="https://images.unsplash.com/photo-1762418362644-a4daad168fb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb250ZW1wb3JhcnklMjBiYXRocm9vbSUyMHJlbm92YXRpb258ZW58MXx8fHwxNzcyODgwNTE4fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Residential Renovation" class="project-image">
               <div class="project-overlay">
                 <span class="text-white display-6" style="letter-spacing: 0.15em;">RESIDENTIAL</span>
               </div>
             </div>
             <div class="project-content">
-              <h3 class="project-title">Modern Kitchen Renovation</h3>
-              <p class="text-muted">Complete kitchen transformation with custom cabinetry</p>
+              <h3 class="project-title">Residential Renovation</h3>
+              <p class="text-muted">Full residential renovation with premium finishes</p>
             </div>
           </div>
         </div>
 
-        <!-- Project 2 -->
+        <!-- Project 4 - Interior Design -->
+        <div class="col-md-6 mb-4 project-item" data-category="interior">
+          <div class="project-card">
+            <div class="project-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1750420556288-d0e32a6f517b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBiZWRyb29tJTIwaW50ZXJpb3IlMjBkZXNpZ258ZW58MXx8fHwxNzcyODU3ODMwfDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Interior Design Transformation" class="project-image">
+              <div class="project-overlay">
+                <span class="text-white display-6" style="letter-spacing: 0.15em;">INTERIOR DESIGN</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Interior Design Transformation</h3>
+              <p class="text-muted">Bespoke interior design and space planning</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 - Before & After -->
+        <div class="col-md-6 mb-4 project-item" data-category="before-after">
+          <div class="project-card">
+            <div class="project-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1765371515218-0a4c992ba8e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob21lJTIwb2ZmaWNlJTIwcmVub3ZhdGlvbiUyMG1vZGVybnxlbnwxfHx8fDE3NzI4ODA1MTl8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Before and After Renovation" class="project-image">
+              <div class="project-overlay">
+                <span class="text-white display-6" style="letter-spacing: 0.15em;">BEFORE & AFTER</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Before & After Renovation</h3>
+              <p class="text-muted">Space reimagined with seamless design and build</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6 - Residential -->
         <div class="col-md-6 mb-4 project-item" data-category="residential">
           <div class="project-card">
             <div class="project-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1669387448840-610c588f003d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBsaXZpbmclMjByb29tJTIwaW50ZXJpb3IlMjBkZXNpZ258ZW58MXx8fHwxNzcyNzk3OTU4fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Luxury Living Room" class="project-image">
+              <img src="https://images.unsplash.com/photo-1763218161026-dd8bcfa832de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXNpZGVudGlhbCUyMGFyY2hpdGVjdHVyZSUyMHJlbm92YXRpb258ZW58MXx8fHwxNzcyODgwNTIwfDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Residential Renovation" class="project-image">
               <div class="project-overlay">
                 <span class="text-white display-6" style="letter-spacing: 0.15em;">RESIDENTIAL</span>
               </div>
             </div>
             <div class="project-content">
-              <h3 class="project-title">Luxury Living Room</h3>
-              <p class="text-muted">Elegant living space with contemporary finishes</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="col-md-6 mb-4 project-item" data-category="residential">
-          <div class="project-card">
-            <div class="project-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1762418362644-a4daad168fb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb250ZW1wb3JhcnklMjBiYXRocm9vbSUyMHJlbm92YXRpb258ZW58MXx8fHwxNzcyODgwNTE4fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Contemporary Bathroom" class="project-image">
-              <div class="project-overlay">
-                <span class="text-white display-6" style="letter-spacing: 0.15em;">RESIDENTIAL</span>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Contemporary Bathroom</h3>
-              <p class="text-muted">Spa-like bathroom with premium materials</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="col-md-6 mb-4 project-item" data-category="residential">
-          <div class="project-card">
-            <div class="project-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1750420556288-d0e32a6f517b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBiZWRyb29tJTIwaW50ZXJpb3IlMjBkZXNpZ258ZW58MXx8fHwxNzcyODU3ODMwfDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Modern Bedroom Suite" class="project-image">
-              <div class="project-overlay">
-                <span class="text-white display-6" style="letter-spacing: 0.15em;">RESIDENTIAL</span>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Modern Bedroom Suite</h3>
-              <p class="text-muted">Tranquil bedroom design with custom built-ins</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="col-md-6 mb-4 project-item" data-category="commercial">
-          <div class="project-card">
-            <div class="project-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1765371515218-0a4c992ba8e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob21lJTIwb2ZmaWNlJTIwcmVub3ZhdGlvbiUyMG1vZGVybnxlbnwxfHx8fDE3NzI4ODA1MTl8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Home Office Renovation" class="project-image">
-              <div class="project-overlay">
-                <span class="text-white display-6" style="letter-spacing: 0.15em;">COMMERCIAL</span>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Home Office Renovation</h3>
-              <p class="text-muted">Professional workspace with smart design</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 6 -->
-        <div class="col-md-6 mb-4 project-item" data-category="residential">
-          <div class="project-card">
-            <div class="project-image-wrapper">
-              <img src="https://images.unsplash.com/photo-1763218161026-dd8bcfa832de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZXNpZGVudGlhbCUyMGFyY2hpdGVjdHVyZSUyMHJlbm92YXRpb258ZW58MXx8fHwxNzcyODgwNTIwfDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Residential Architecture" class="project-image">
-              <div class="project-overlay">
-                <span class="text-white display-6" style="letter-spacing: 0.15em;">RESIDENTIAL</span>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Residential Architecture</h3>
-              <p class="text-muted">Full home renovation and architectural redesign</p>
+              <h3 class="project-title">Residential Renovation Project</h3>
+              <p class="text-muted">Full home renovation and interior redesign</p>
             </div>
           </div>
         </div>

@@ -91,9 +91,9 @@
     name:    'PPC CONSTRUCTION',
     logo:    'images/company-logo.png',
     tagline: 'Building quality structures, enriching communities. Your trusted partner for exceptional construction services.',
-    address: '123 Construction Ave<br>Your City, State 00000',
-    phone:   '(000) 000-0000',
-    email:   'info@ppcconstruction.com',
+    address: '52, Jalan Bunga Melur 12, Taman Muda <br>68000 Ampang, Selangor',
+    phone:   '(+60)10-250 2525',
+    email:   'ppc.construction.my@gmail.com',
     year:    new Date().getFullYear(),
   };
 
@@ -194,7 +194,6 @@
               </div>
               <div class="col-md-6 text-center text-md-end">
                 <a href="#" class="me-3">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
               </div>
             </div>
           </div>
