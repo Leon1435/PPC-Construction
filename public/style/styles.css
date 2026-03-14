@@ -67,7 +67,7 @@ body {
 /* Hero Section */
 .hero-section {
   min-height: 100vh;
-  background: linear-gradient(to bottom, var(--dark-bg-light), var(--dark-bg));
+  background: linear-gradient(165deg, var(--dark-bg-light) 0%, var(--dark-bg) 50%, #1f1f1f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,20 +117,22 @@ body {
 
 /* Buttons */
 .btn-primary-custom {
-  background-color: var(--primary-color);
+  background: linear-gradient(180deg, #ff1a1a 0%, var(--primary-color) 50%, var(--primary-hover) 100%);
   color: #fff;
   padding: 1rem 3rem;
   font-size: 0.875rem;
   letter-spacing: 0.1em;
   border: none;
-  transition: background-color 0.3s;
+  transition: box-shadow 0.3s, transform 0.2s;
   text-decoration: none;
   display: inline-block;
+  box-shadow: 0 4px 14px rgba(230, 0, 0, 0.35);
 }
 
 .btn-primary-custom:hover {
-  background-color: var(--primary-hover);
+  background: linear-gradient(180deg, #ff3333 0%, #e60000 50%, #a80000 100%);
   color: #fff;
+  box-shadow: 0 6px 20px rgba(230, 0, 0, 0.45);
 }
 
 /* Project Cards */
@@ -209,7 +211,7 @@ body {
 
 /* Footer */
 .footer {
-  background-color: var(--dark-bg);
+  background: linear-gradient(180deg, var(--dark-bg-light) 0%, var(--dark-bg) 40%, #252525 100%);
   color: #fff;
   padding: 4rem 0 0;
 }
@@ -249,6 +251,11 @@ body {
   color: var(--primary-color);
 }
 
+.footer .btn-primary-custom,
+.footer .btn-primary-custom:hover {
+  color: #fff !important;
+}
+
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: 3rem;
@@ -260,6 +267,7 @@ body {
 .social-icon {
   width: 2.5rem;
   height: 2.5rem;
+  background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: inline-flex;
@@ -270,8 +278,14 @@ body {
 }
 
 .social-icon:hover {
-  background-color: var(--primary-color);
+  background: linear-gradient(145deg, #ff1a1a 0%, var(--primary-color) 50%, var(--primary-hover) 100%);
   border-color: var(--primary-color);
+  color: #fff;
+}
+
+.social-icon:hover svg {
+  fill: #fff;
+  stroke: #fff;
 }
 
 /* Form Styling */
@@ -394,12 +408,12 @@ body {
 
 /* Dark Sections */
 .bg-dark-custom {
-  background-color: var(--dark-bg);
+  background: linear-gradient(165deg, var(--dark-bg-light) 0%, var(--dark-bg) 60%, #252525 100%);
   color: #fff;
 }
 
 .bg-dark-gradient {
-  background: linear-gradient(to bottom, var(--dark-bg-light), var(--dark-bg));
+  background: linear-gradient(165deg, var(--dark-bg-light) 0%, var(--dark-bg) 50%, #1f1f1f 100%);
   color: #fff;
 }
 
