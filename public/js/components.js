@@ -27,6 +27,7 @@
   const headConfig = {
     bootstrapHref: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
     customCssHref: 'style/styles.css',
+    faviconHref: 'images/favicon.png',  /* Tab icon: put your image at public/images/favicon.png (or .ico) */
   };
 
   /* ──────────────────────────────────────────
@@ -66,6 +67,21 @@
       linkC.rel = 'stylesheet';
       linkC.href = headConfig.customCssHref;
       head.appendChild(linkC);
+    }
+
+    if (headConfig.faviconHref && !document.querySelector('link[rel="icon"]')) {
+      const isIco = headConfig.faviconHref.indexOf('.ico') !== -1;
+      const linkF = document.createElement('link');
+      linkF.rel = 'icon';
+      linkF.href = headConfig.faviconHref;
+      linkF.type = isIco ? 'image/x-icon' : 'image/png';
+      linkF.sizes = '32x32';  /* Hint: use a 32x32 or 64x64 image for a sharper tab icon */
+      head.appendChild(linkF);
+      /* Apple touch icon (e.g. when saving to home screen) – same image, looks bigger there */
+      const linkA = document.createElement('link');
+      linkA.rel = 'apple-touch-icon';
+      linkA.href = headConfig.faviconHref;
+      head.appendChild(linkA);
     }
   }
   injectHead();
