@@ -27,7 +27,7 @@
   const headConfig = {
     bootstrapHref: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
     customCssHref: 'style/styles.css',
-    faviconHref: 'images/favicon.png',  /* Tab icon: put your image at public/images/favicon.png (or .ico) */
+    faviconHref: 'images/company-logo.png',  /* Tab icon: put your image at public/images/favicon.png (or .ico) */
   };
 
   /* ──────────────────────────────────────────
