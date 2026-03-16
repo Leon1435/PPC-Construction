@@ -7,15 +7,6 @@
   --text-dark: #363636;
 }
 
-/* Prevent flash of content before nav/footer are injected */
-html.ppc-loading body {
-  opacity: 0;
-}
-body {
-  opacity: 1;
-  transition: opacity 0.15s ease-out;
-}
-
 * {
   margin: 0;
   padding: 0;

@@ -1,69 +1,15 @@
 /**
  * PPC Construction – Shared Components
- * Injects head (title, meta, CSS), navbar, and footer into every page.
- * To update head, nav, or footer, edit ONLY this file.
+ * Injects navbar and footer into every page. Head (title, meta, favicon) is in each page's HTML.
+ * To update nav or footer, edit ONLY this file.
  */
 
 (function () {
   /* ──────────────────────────────────────────
-     DETECT ACTIVE PAGE (used for head and nav)
+     DETECT ACTIVE PAGE (used for nav highlight)
   ────────────────────────────────────────── */
   const pathSegment = (window.location.pathname.split('/').filter(Boolean).pop() || '').toLowerCase();
   const currentPage = pathSegment === '' ? 'index.html' : (pathSegment.endsWith('.html') ? pathSegment : pathSegment + '.html');
-
-  /* ──────────────────────────────────────────
-     PAGE HEAD CONFIG (title + meta description per page)
-  ────────────────────────────────────────── */
-  const pageMeta = {
-    'index.html':    { title: 'PPC Construction - Quality Construction Services',           description: 'PPC Construction delivers premium residential and commercial construction and renovation services. From concept to completion, we build with quality and precision.' },
-    'services.html': { title: 'Our Services - PPC Construction',                             description: 'Explore our full range of construction services including residential builds, commercial projects, renovations, and design consultation.' },
-    'our-work.html': { title: 'Our Work - PPC Construction',                                 description: 'Browse our portfolio of completed residential and commercial construction projects by PPC Construction.' },
-    'about-us.html': { title: 'About Us - PPC Construction',                                 description: 'Learn about PPC Construction — our story, values, and the team behind our award-winning construction projects.' },
-    'guide.html':    { title: 'Construction Guide - PPC Construction',                       description: 'Your comprehensive guide to planning and executing a successful construction or renovation project with PPC Construction.' },
-    'contact.html':  { title: 'Contact - PPC Construction',                                   description: 'Get in touch with PPC Construction. We\'re here to answer your questions and discuss your project.' },
-    'enquiry.html':  { title: 'Project Enquiry - PPC Construction',                         description: 'Start your construction or renovation project with PPC Construction. Fill out our enquiry form and we\'ll reach out within 24 hours.' },
-    'privacy-policy.html': { title: 'Privacy Policy - PPC Construction',                    description: 'Privacy Policy for PPC Construction. How we collect, use, and protect your personal information.' },
-  };
-
-  const headConfig = {
-    bootstrapHref: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-    customCssHref: 'style/styles.css',
-    faviconHref: 'images/company-logo.png',  /* Tab icon: put your image at public/images/favicon.png (or .ico) */
-  };
-
-  /* ──────────────────────────────────────────
-     INJECT HEAD (run immediately)
-  ────────────────────────────────────────── */
-  function injectHead() {
-    const meta = pageMeta[currentPage] || pageMeta['index.html'];
-    const head = document.head;
-
-    document.title = meta.title;
-
-    let desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', meta.description);
-    else {
-      desc = document.createElement('meta');
-      desc.name = 'description';
-      desc.content = meta.description;
-      head.appendChild(desc);
-    }
-
-    if (headConfig.faviconHref && !document.querySelector('link[rel="icon"]')) {
-      const isIco = headConfig.faviconHref.indexOf('.ico') !== -1;
-      const linkF = document.createElement('link');
-      linkF.rel = 'icon';
-      linkF.href = headConfig.faviconHref;
-      linkF.type = isIco ? 'image/x-icon' : 'image/png';
-      linkF.sizes = '32x32';
-      head.appendChild(linkF);
-      const linkA = document.createElement('link');
-      linkA.rel = 'apple-touch-icon';
-      linkA.href = headConfig.faviconHref;
-      head.appendChild(linkA);
-    }
-  }
-  injectHead();
 
   /* ──────────────────────────────────────────
      NAV LINKS CONFIG
@@ -205,12 +151,5 @@
 
     if (navSlot)    navSlot.outerHTML    = buildNavbar();
     if (footerSlot) footerSlot.outerHTML = buildFooter();
-
-    document.documentElement.classList.remove('ppc-loading');
   });
-
-  /* Fallback: show page if script runs late or placeholders missing */
-  setTimeout(function () {
-    document.documentElement.classList.remove('ppc-loading');
-  }, 2000);
 })();
