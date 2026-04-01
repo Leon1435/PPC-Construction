@@ -5,6 +5,9 @@
   --dark-bg: #363636;
   --dark-bg-light: #2b2b2b;
   --text-dark: #363636;
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-duration: 0.75s;
 }
 
 * {
@@ -19,6 +22,12 @@ body {
   color: #333;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Navigation */
 .navbar {
   background-color: var(--dark-bg) !important;
@@ -27,6 +36,11 @@ body {
   top: 0;
   width: 100%;
   z-index: 1000;
+  transition: box-shadow 0.35s var(--ease-out), background-color 0.35s ease;
+}
+
+.navbar.navbar-scrolled {
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.28);
 }
 
 .navbar-brand {
@@ -48,7 +62,29 @@ body {
   font-size: 0.875rem;
   letter-spacing: 0.1em;
   margin: 0 1rem;
-  transition: color 0.3s;
+  position: relative;
+  transition: color 0.3s ease, opacity 0.25s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.15rem;
+    height: 2px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s var(--ease-out);
+    opacity: 0.95;
+  }
+
+  .navbar-nav .nav-link:hover::after,
+  .navbar-nav .nav-link.active::after {
+    transform: scaleX(1);
+  }
 }
 
 .navbar-nav .nav-link:hover,
@@ -96,6 +132,30 @@ body {
   text-transform: uppercase;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  body.js-motion .hero-motion .hero-logo,
+  body.js-motion .hero-motion .hero-tagline {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+
+  body.js-motion .hero-motion.hero-motion-in .hero-logo {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 1s var(--ease-out),
+      transform 1s var(--ease-out);
+  }
+
+  body.js-motion .hero-motion.hero-motion-in .hero-tagline {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.85s var(--ease-out) 0.14s,
+      transform 0.85s var(--ease-out) 0.14s;
+  }
+}
+
 /* Section Styling */
 .section-padding {
   padding: 6rem 0;
@@ -113,6 +173,7 @@ body {
   height: 2px;
   background-color: var(--primary-color);
   margin: 0 auto 2rem;
+  transform-origin: center;
 }
 
 /* Buttons */
@@ -123,7 +184,10 @@ body {
   font-size: 0.875rem;
   letter-spacing: 0.1em;
   border: none;
-  transition: box-shadow 0.3s, transform 0.2s;
+  transition:
+    box-shadow 0.35s var(--ease-out),
+    transform 0.3s var(--ease-out),
+    background 0.35s ease;
   text-decoration: none;
   display: inline-block;
   box-shadow: 0 4px 14px rgba(230, 0, 0, 0.35);
@@ -132,7 +196,12 @@ body {
 .btn-primary-custom:hover {
   background: linear-gradient(180deg, #ff3333 0%, #e60000 50%, #a80000 100%);
   color: #fff;
-  box-shadow: 0 6px 20px rgba(230, 0, 0, 0.45);
+  box-shadow: 0 8px 26px rgba(230, 0, 0, 0.42);
+  transform: translateY(-2px);
+}
+
+.btn-primary-custom:active {
+  transform: translateY(0);
 }
 
 /* Project Cards */
@@ -140,12 +209,15 @@ body {
   overflow: hidden;
   margin-bottom: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
+  transition:
+    box-shadow 0.4s var(--ease-out),
+    transform 0.4s var(--ease-out);
   background: #fff;
 }
 
 .project-card:hover {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.16);
+  transform: translateY(-4px);
 }
 
 .project-image-wrapper {
@@ -173,7 +245,7 @@ body {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.4s var(--ease-out);
 }
 
 .project-card:hover .project-overlay {
@@ -484,6 +556,11 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.form-control,
+.form-select {
+  transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
 .form-control:focus,
 .form-select:focus {
   border-color: var(--primary-color);
@@ -499,13 +576,28 @@ body {
   background-color: #f3f4f6;
   color: #374151;
   margin: 0 0.5rem 1rem;
-  transition: all 0.3s;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s ease,
+    box-shadow 0.35s var(--ease-out),
+    transform 0.25s var(--ease-out);
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .filter-btn:hover,
 .filter-btn.active {
   background-color: var(--primary-color);
   color: #fff;
+}
+
+.filter-btn.active {
+  box-shadow: 0 4px 14px rgba(230, 0, 0, 0.35);
 }
 
 /* Icon Circle */
@@ -538,6 +630,16 @@ body {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 0.25rem;
+  transition:
+    border-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+}
+
+.content-block:hover {
+  border-color: rgba(230, 0, 0, 0.22);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
 }
 
 /* Key benefits list */
@@ -560,12 +662,16 @@ body {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 0.25rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
 }
 
 .service-item:hover {
   border-color: var(--primary-color);
-  box-shadow: 0 2px 8px rgba(230, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(230, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
 .service-item-icon {
@@ -685,4 +791,54 @@ body {
 
 .policy-block a:hover {
   text-decoration: underline;
+}
+
+/* ─── Page motion (scroll reveal + hero) — toggled via body.js-motion from components.js ─── */
+@media (prefers-reduced-motion: no-preference) {
+  body.js-motion .motion-section {
+    opacity: 0;
+    transform: translateY(1.75rem);
+    transition:
+      opacity var(--motion-duration) var(--ease-out),
+      transform var(--motion-duration) var(--ease-out);
+  }
+
+  body.js-motion .motion-section.motion-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  body.js-motion .motion-section:not(.motion-in) .section-divider {
+    transform: scaleX(0);
+    opacity: 0;
+    transition:
+      transform 0.55s var(--ease-out),
+      opacity 0.35s ease;
+  }
+
+  body.js-motion .motion-section.motion-in .section-divider {
+    transform: scaleX(1);
+    opacity: 1;
+    transition:
+      transform 0.6s var(--ease-out) 0.08s,
+      opacity 0.4s ease 0.05s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .navbar.navbar-scrolled {
+    box-shadow: none;
+  }
+
+  .btn-primary-custom:hover,
+  .project-card:hover,
+  .content-block:hover,
+  .service-item:hover,
+  .filter-btn:hover {
+    transform: none;
+  }
 }

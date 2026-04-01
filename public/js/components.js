@@ -155,6 +155,96 @@
   }
 
   /* ──────────────────────────────────────────
+     PAGE MOTION (scroll reveal, hero entrance, navbar shadow)
+  ────────────────────────────────────────── */
+  function isRoughlyVisible(el) {
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    return r.top < vh * 0.9 && r.bottom > 56;
+  }
+
+  function initNavbarScrollShadow() {
+    const nav = document.querySelector('.navbar');
+    if (!nav) return;
+    const onScroll = function () {
+      nav.classList.toggle('navbar-scrolled', window.scrollY > 24);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  function initPageMotion() {
+    initNavbarScrollShadow();
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.body.classList.add('js-motion');
+
+    const hero = document.querySelector('section.hero-section');
+    if (hero) {
+      hero.classList.add('hero-motion');
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          hero.classList.add('hero-motion-in');
+        });
+      });
+    }
+
+    const footerEl = document.querySelector('footer.footer');
+    const preFooterLinked =
+      footerEl &&
+      footerEl.previousElementSibling &&
+      footerEl.previousElementSibling.tagName === 'SECTION'
+        ? footerEl.previousElementSibling
+        : null;
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          const t = entry.target;
+          t.classList.add('motion-in');
+          if (preFooterLinked && t === preFooterLinked && footerEl) {
+            footerEl.classList.add('motion-in');
+          }
+          observer.unobserve(t);
+        });
+      },
+      { root: null, rootMargin: '0px 0px -6% 0px', threshold: 0.06 }
+    );
+
+    document.querySelectorAll('body > section:not(.hero-section)').forEach(function (el) {
+      el.classList.add('motion-section');
+      if (el === preFooterLinked) {
+        return;
+      }
+      if (isRoughlyVisible(el)) {
+        el.classList.add('motion-in');
+      } else {
+        observer.observe(el);
+      }
+    });
+
+    if (footerEl) {
+      footerEl.classList.add('motion-section');
+      if (preFooterLinked) {
+        if (isRoughlyVisible(preFooterLinked)) {
+          preFooterLinked.classList.add('motion-in');
+          footerEl.classList.add('motion-in');
+        } else {
+          observer.observe(preFooterLinked);
+        }
+      } else {
+        if (isRoughlyVisible(footerEl)) {
+          footerEl.classList.add('motion-in');
+        } else {
+          observer.observe(footerEl);
+        }
+      }
+    }
+  }
+
+  /* ──────────────────────────────────────────
      INJECT
   ────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
@@ -163,5 +253,7 @@
 
     if (navSlot)    navSlot.outerHTML    = buildNavbar();
     if (footerSlot) footerSlot.outerHTML = buildFooter();
+
+    initPageMotion();
   });
 })();
