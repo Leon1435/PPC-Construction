@@ -1,0 +1,34 @@
+# =============================================================================
+# PPC Construction — site settings (edit this file; save as plain text UTF-8)
+# =============================================================================
+# How it works: each line is NAME=value. Lines starting with # are ignored.
+# Only change the text after the = sign. Do not delete the NAME= part.
+# If you leave a social link empty, that icon is hidden on the site.
+# =============================================================================
+
+# --- Brand (footer & navigation) ---
+COMPANY_NAME=PPC CONSTRUCTION
+LOGO_PATH=images/company-logo.png
+TAGLINE=Building quality structures, enriching communities. Your trusted partner for exceptional construction services.
+
+# --- Contact details (footer & Contact page) ---
+# ADDRESS can use HTML line breaks: write <br> where you want a new line
+ADDRESS=52, Jalan Bunga Melur 12, Taman Muda <br>68000 Ampang, Selangor
+PHONE=(+60)10-250 2525
+EMAIL=ppc.construction.my@gmail.com
+
+# --- WhatsApp (footer icon & pre-filled chat message) ---
+# WHATSAPP_NUMBER: digits only, country code without + or spaces (Malaysia example: 601012345678)
+WHATSAPP_NUMBER=60102502525
+WHATSAPP_MESSAGE=Hello, I would like to discuss a project with PPC Construction. Please connect me with the project manager.
+
+# --- Social media (full web address, including https://) ---
+FACEBOOK_URL=
+INSTAGRAM_URL=
+LINKEDIN_URL=
+
+# --- Contact page: map & business hours ---
+# MAP_EMBED_URL: paste the full src=... URL from a Google Maps embed (Share > Embed a map)
+MAP_EMBED_URL=https://www.google.com/maps?q=52+Jalan+Bunga+Melur+12,+Taman+Muda,+68000+Ampang,+Selangor,+Malaysia&output=embed
+# BUSINESS_HOURS: use \n for line breaks (e.g. new line before "Sat:")
+BUSINESS_HOURS=Mon - Fri: 9:00 AM - 6:00 PM\nSat: 10:00 AM - 4:00 PM\nSun: Closed
