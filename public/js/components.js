@@ -2,6 +2,7 @@
  * PPC Construction – Shared Components
  * Injects navbar and footer into every page. Head (title, meta, favicon) is in each page's HTML.
  * Client-editable contact & social links: public/site-settings.txt (plain text, KEY=value).
+ * Enquiry form emails: Web3Forms (https://web3forms.com) — set ENQUIRY_WEB3FORMS_ACCESS_KEY in site settings.
  */
 
 (function () {
@@ -56,6 +57,8 @@
       mapEmbedUrl:
         'https://www.google.com/maps?q=52+Jalan+Bunga+Melur+12,+Taman+Muda,+68000+Ampang,+Selangor,+Malaysia&output=embed',
       businessHours: 'Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM<br>Sun: Closed',
+      enquiryWeb3formsAccessKey: '',
+      enquiryEmailSubject: 'New project enquiry',
     };
   }
 
@@ -79,6 +82,8 @@
       LINKEDIN_URL: 'linkedinUrl',
       MAP_EMBED_URL: 'mapEmbedUrl',
       BUSINESS_HOURS: 'businessHours',
+      ENQUIRY_WEB3FORMS_ACCESS_KEY: 'enquiryWeb3formsAccessKey',
+      ENQUIRY_EMAIL_SUBJECT: 'enquiryEmailSubject',
     };
 
     for (let i = 0; i < lines.length; i++) {
@@ -362,6 +367,200 @@
     if (map && company.mapEmbedUrl) map.setAttribute('src', company.mapEmbedUrl);
   }
 
+  /** Contact page: submit opens WhatsApp with fields as plain text (uses WHATSAPP_NUMBER from site settings). */
+  function initContactWhatsAppForm(company) {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    const waDigits = String(company.whatsappE164 || '').replace(/\D/g, '');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!waDigits) {
+        window.alert('WhatsApp number is not configured. Please use phone or email on this page.');
+        return;
+      }
+      function field(id) {
+        const el = document.getElementById(id);
+        return el ? String(el.value || '').trim() : '';
+      }
+      const text =
+        '*First Name:* ' +
+        field('firstName') +
+        '\n' +
+        '*Last Name:* ' +
+        field('lastName') +
+        '\n' +
+        '*Email:* ' +
+        field('email') +
+        '\n' +
+        '*Phone:* ' +
+        field('phone') +
+        '\n' +
+        '*Message:* ' +
+        field('message');
+      const url = 'https://wa.me/' + waDigits + '?text=' + encodeURIComponent(text);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  /**
+   * Enquiry page: POST formatted body to Web3Forms; they email the address verified in the Web3Forms dashboard.
+   * Requires ENQUIRY_WEB3FORMS_ACCESS_KEY in site-settings.txt (free account at https://web3forms.com).
+   */
+  function initEnquiryEmailForm(company) {
+    const form = document.getElementById('enquiry-form');
+    if (!form) return;
+    const accessKey = String(company.enquiryWeb3formsAccessKey || '').trim();
+    const subjectLine = String(company.enquiryEmailSubject || 'New project enquiry').trim() || 'New project enquiry';
+    const statusEl = document.getElementById('enquiry-form-status');
+    const submitBtn = document.getElementById('enquiry-submit-btn');
+
+    const projectTypeLabels = {
+      residential: 'New Residential Build',
+      commercial: 'New Commercial Build',
+      renovation: 'Full Renovation',
+      extension: 'Extension / Addition',
+      'fit-out': 'Fit-Out',
+      other: 'Other',
+    };
+    const budgetLabels = {
+      '10-25k': 'RM 10,000 - RM 25,000',
+      '25-50k': 'RM 25,000 - RM 50,000',
+      '50-100k': 'RM 50,000 - RM 100,000',
+      '100k+': 'RM 100,000+',
+      flexible: 'Flexible',
+    };
+    const timelineLabels = {
+      asap: 'As soon as possible',
+      '1-3': '1-3 months',
+      '3-6': '3-6 months',
+      '6+': '6+ months',
+      flexible: 'Flexible',
+    };
+    const referralLabels = {
+      search: 'Search Engine',
+      social: 'Social Media',
+      referral: 'Referral',
+      advertisement: 'Advertisement',
+      other: 'Other',
+    };
+
+    function val(id) {
+      const el = document.getElementById(id);
+      return el ? String(el.value || '').trim() : '';
+    }
+    function selectDisplay(id, map) {
+      const v = val(id);
+      return map[v] != null ? map[v] : v;
+    }
+    function yn(id) {
+      const el = document.getElementById(id);
+      return el && el.checked ? 'Yes' : 'No';
+    }
+
+    /** HTML email body: bold labels via &lt;strong&gt;, values escaped. */
+    function buildEnquiryEmailHtml() {
+      const br = '<br>';
+      function line(label, valueHtml) {
+        return '<strong>' + label + '</strong> ' + valueHtml;
+      }
+      const descHtml = escapeHtml(val('description')).replace(/\r\n/g, '\n').replace(/\n/g, '<br>');
+      const parts = [
+        line('First Name:', escapeHtml(val('firstName'))),
+        line('Last Name:', escapeHtml(val('lastName'))),
+        line('Email:', escapeHtml(val('email'))),
+        line('Phone:', escapeHtml(val('phone'))),
+        line('Project Type:', escapeHtml(selectDisplay('projectType', projectTypeLabels))),
+        line('Property Address:', escapeHtml(val('address'))),
+        line('Estimated Budget:', escapeHtml(selectDisplay('budget', budgetLabels))),
+        line('Desired Timeline:', escapeHtml(selectDisplay('timeline', timelineLabels))),
+        line('Project Description:', descHtml),
+        line('How did you hear about us?:', escapeHtml(selectDisplay('referral', referralLabels))),
+        line(
+          'I would like to schedule an in-person consultation:',
+          escapeHtml(yn('consultationCheck'))
+        ),
+      ];
+      return parts.join(br);
+    }
+
+    function showEnquirySuccessModal() {
+      const el = document.getElementById('enquiry-success-modal');
+      if (el && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        bootstrap.Modal.getOrCreateInstance(el).show();
+      } else {
+        window.alert('Thank you — your enquiry was sent successfully. We will get back to you soon.');
+      }
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (statusEl) {
+        statusEl.textContent = '';
+        statusEl.className = 'text-center small mt-3 mb-0';
+      }
+
+      if (!accessKey) {
+        window.alert(
+          'Enquiry email is not configured yet. Add ENQUIRY_WEB3FORMS_ACCESS_KEY to site-settings.txt (free key from web3forms.com).'
+        );
+        return;
+      }
+
+      const bodyHtml = buildEnquiryEmailHtml();
+
+      const fromName = (val('firstName') + ' ' + val('lastName')).trim() || 'Website enquiry';
+
+      const payload = {
+        access_key: accessKey,
+        subject: subjectLine,
+        from_name: fromName,
+        email: val('email'),
+        message: bodyHtml,
+      };
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+      }
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            return { ok: res.ok, data: data };
+          });
+        })
+        .then(function (result) {
+          if (result.ok && result.data && result.data.success) {
+            form.reset();
+            if (statusEl) {
+              statusEl.textContent = '';
+              statusEl.className = 'text-center small mt-3 mb-0';
+            }
+            showEnquirySuccessModal();
+          } else {
+            const msg =
+              (result.data && (result.data.message || result.data.error)) ||
+              'Something went wrong. Please try again or contact us by phone or email.';
+            window.alert(msg);
+          }
+        })
+        .catch(function () {
+          window.alert('Could not send your enquiry. Check your connection and try again.');
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-busy');
+          }
+        });
+    });
+  }
+
   /* ──────────────────────────────────────────
      INJECT
   ────────────────────────────────────────── */
@@ -374,6 +573,8 @@
       if (footerSlot) footerSlot.outerHTML = buildFooter(company);
 
       applyContactPagePlaceholders(company);
+      initContactWhatsAppForm(company);
+      initEnquiryEmailForm(company);
       initPageMotion();
     });
   });

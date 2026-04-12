@@ -842,3 +842,29 @@ body {
     transform: none;
   }
 }
+
+/* Enquiry form: success modal */
+.enquiry-success-modal .modal-content {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.enquiry-success-modal__header {
+  background: linear-gradient(135deg, #157347 0%, #0d4f33 100%);
+  color: #fff;
+  padding: 1.25rem 1.25rem 1rem;
+}
+
+.enquiry-success-modal__icon {
+  display: flex;
+  color: #fff;
+  opacity: 0.95;
+}
+
+.enquiry-success-modal .modal-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.enquiry-success-modal .modal-footer {
+  padding: 0 1.5rem 1.5rem;
+}
