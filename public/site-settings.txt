@@ -15,7 +15,7 @@ TAGLINE=Building quality structures, enriching communities. Your trusted partner
 # ADDRESS can use HTML line breaks: write <br> where you want a new line
 ADDRESS=52, Jalan Bunga Melur 12, Taman Muda <br>68000 Ampang, Selangor
 PHONE=(+60)10-250 2525
-EMAIL=leonidasdamrong0828@gmail.com
+EMAIL=ppc.construction.my@gmail.com
 
 # --- WhatsApp (footer icon & pre-filled chat message) ---
 # The WhatsApp app does NOT store this text — it is set here on the website. When a visitor
@@ -23,7 +23,7 @@ EMAIL=leonidasdamrong0828@gmail.com
 # Edit only the part after WHATSAPP_MESSAGE= (keep it on one line, or use \n for a new line).
 #
 # WHATSAPP_NUMBER: digits only, country code without + or spaces (Malaysia example: 601012345678)
-WHATSAPP_NUMBER=60135860035
+WHATSAPP_NUMBER=60102502525
 WHATSAPP_MESSAGE=Hello, I would like to discuss a project with PPC Construction. Please connect me with the project manager.
 
 # --- Social media (full web address, including https://) ---

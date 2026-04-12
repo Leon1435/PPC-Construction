@@ -458,39 +458,53 @@
       return el && el.checked ? 'Yes' : 'No';
     }
 
-    /** HTML email body: bold labels via &lt;strong&gt;, values escaped. */
-    function buildEnquiryEmailHtml() {
-      const br = '<br>';
-      function line(label, valueHtml) {
-        return '<strong>' + label + '</strong> ' + valueHtml;
+    /**
+     * Plain-text email body (Web3Forms shows the Message field as text; HTML tags appear literally).
+     * Labels use CAPS + line so they stand out without markup.
+     */
+    function buildEnquiryEmailPlainText() {
+      function block(title, content) {
+        return title + '\n' + String(content || '').trim();
       }
-      const descHtml = escapeHtml(val('description')).replace(/\r\n/g, '\n').replace(/\n/g, '<br>');
       const parts = [
-        line('First Name:', escapeHtml(val('firstName'))),
-        line('Last Name:', escapeHtml(val('lastName'))),
-        line('Email:', escapeHtml(val('email'))),
-        line('Phone:', escapeHtml(val('phone'))),
-        line('Project Type:', escapeHtml(selectDisplay('projectType', projectTypeLabels))),
-        line('Property Address:', escapeHtml(val('address'))),
-        line('Estimated Budget:', escapeHtml(selectDisplay('budget', budgetLabels))),
-        line('Desired Timeline:', escapeHtml(selectDisplay('timeline', timelineLabels))),
-        line('Project Description:', descHtml),
-        line('How did you hear about us?:', escapeHtml(selectDisplay('referral', referralLabels))),
-        line(
-          'I would like to schedule an in-person consultation:',
-          escapeHtml(yn('consultationCheck'))
-        ),
+        block('FIRST NAME:', val('firstName')),
+        block('LAST NAME:', val('lastName')),
+        block('EMAIL:', val('email')),
+        block('PHONE:', val('phone')),
+        block('PROJECT TYPE', selectDisplay('projectType', projectTypeLabels)),
+        block('PROPERTY ADDRESS:', val('address')),
+        block('ESTIMATED BUDGET:', selectDisplay('budget', budgetLabels)),
+        block('DESIRED TIMELINE', selectDisplay('timeline', timelineLabels)),
+        block('PROJECT DESCRIPTION:', val('description').replace(/\r\n/g, '\n')),
+        block('HOW DID YOU HEAR ABOUT US?', selectDisplay('referral', referralLabels)),
+        block('IN-PERSON CONSULTATION REQUESTED:', yn('consultationCheck')),
       ];
-      return parts.join(br);
+      return parts.join('\n\n');
     }
 
     function showEnquirySuccessModal() {
       const el = document.getElementById('enquiry-success-modal');
       if (el && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const tick = el.querySelector('[data-enquiry-tick-animation]');
+        if (tick) {
+          tick.classList.remove('enquiry-success-modal__tick--run');
+          void tick.offsetWidth;
+          tick.classList.add('enquiry-success-modal__tick--run');
+        }
         bootstrap.Modal.getOrCreateInstance(el).show();
       } else {
         window.alert('Thank you — your enquiry was sent successfully. We will get back to you soon.');
       }
+    }
+
+    const enquirySuccessModalEl = document.getElementById('enquiry-success-modal');
+    if (enquirySuccessModalEl) {
+      enquirySuccessModalEl.addEventListener('show.bs.modal', function () {
+        document.body.classList.add('enquiry-success-modal-open');
+      });
+      enquirySuccessModalEl.addEventListener('hidden.bs.modal', function () {
+        document.body.classList.remove('enquiry-success-modal-open');
+      });
     }
 
     form.addEventListener('submit', function (e) {
@@ -507,7 +521,7 @@
         return;
       }
 
-      const bodyHtml = buildEnquiryEmailHtml();
+      const bodyText = buildEnquiryEmailPlainText();
 
       const fromName = (val('firstName') + ' ' + val('lastName')).trim() || 'Website enquiry';
 
@@ -516,7 +530,7 @@
         subject: subjectLine,
         from_name: fromName,
         email: val('email'),
-        message: bodyHtml,
+        message: bodyText,
       };
 
       if (submitBtn) {
