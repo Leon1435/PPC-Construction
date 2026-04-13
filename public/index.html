@@ -18,7 +18,44 @@
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="container">
-      <img src="images/company-logo.png" alt="PPC Construction" class="hero-logo">
+      <div class="hero-coverflow" data-hero-coverflow aria-label="Featured: MARC Residence slideshow">
+        <div class="hero-coverflow__stage" data-hero-coverflow-stage>
+          <div class="hero-coverflow__slide" data-hero-coverflow-slide>
+            <img src="images/MARC Residence 1.jpg" alt="MARC Residence project photo 1" class="hero-coverflow__img">
+          </div>
+          <div class="hero-coverflow__slide" data-hero-coverflow-slide>
+            <img src="images/MARC Residence 2.jpg" alt="MARC Residence project photo 2" class="hero-coverflow__img">
+          </div>
+          <div class="hero-coverflow__slide" data-hero-coverflow-slide>
+            <img src="images/MARC Residence 3.jpg" alt="MARC Residence project photo 3" class="hero-coverflow__img">
+          </div>
+          <div class="hero-coverflow__slide" data-hero-coverflow-slide>
+            <img src="images/MARC Residence 4.jpg" alt="MARC Residence project photo 4" class="hero-coverflow__img">
+          </div>
+          <div class="hero-coverflow__slide" data-hero-coverflow-slide>
+            <img src="images/MARC Residence 5.jpg" alt="MARC Residence project photo 5" class="hero-coverflow__img">
+          </div>
+          <div class="hero-coverflow__slide" data-hero-coverflow-slide>
+            <img src="images/MARC Residence 6.jpg" alt="MARC Residence project photo 6" class="hero-coverflow__img">
+          </div>
+          <div class="hero-coverflow__slide" data-hero-coverflow-slide>
+            <img src="images/MARC Residence 7.jpg" alt="MARC Residence project photo 7" class="hero-coverflow__img">
+          </div>
+          <div class="hero-coverflow__slide" data-hero-coverflow-slide>
+            <img src="images/MARC Residence 8.jpg" alt="MARC Residence project photo 8" class="hero-coverflow__img">
+          </div>
+        </div>
+        <div class="hero-coverflow__project-name" aria-hidden="true">MARC Residence</div>
+
+        <div class="hero-coverflow__controls" aria-label="Slideshow controls">
+          <button type="button" class="hero-coverflow__btn" data-hero-coverflow-prev aria-label="Previous slide">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <button type="button" class="hero-coverflow__btn" data-hero-coverflow-next aria-label="Next slide">
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+      </div>
       <p class="hero-tagline">INNOVATING SOLUTIONS FOR A CHANGING WORLD</p>
     </div>
   </section>
@@ -71,36 +108,42 @@
       
       <div class="row mt-5">
         <div class="col-md-4 mb-4">
-          <div class="project-card">
-            <div class="project-image-wrapper">
-              <img src="images\Before After Thumbnail.jpg" alt="Before and After Renovation" class="project-image">
-              <div class="project-overlay">
-                <p class="text-white fs-5 fw-bold">Before & After Renovation</p>
+          <a class="project-card-link" href="our-work.html#project-before-after" aria-label="View Before & After Renovation project">
+            <div class="project-card">
+              <div class="project-image-wrapper">
+                <img src="images\\Before After Thumbnail.jpg" alt="Before and After Renovation" class="project-image">
+                <div class="project-overlay">
+                  <p class="text-white fs-5 fw-bold">Before &amp; After Renovation</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
         
         <div class="col-md-4 mb-4">
-          <div class="project-card">
-            <div class="project-image-wrapper">
-              <img src="images\Cabbeen.jpg" alt="Shoplot Renovation" class="project-image">
-              <div class="project-overlay">
-                <p class="text-white fs-5 fw-bold">Shoplot Renovation</p>
+          <a class="project-card-link" href="our-work.html#project-cabbeen" aria-label="View Cabbeen shoplot renovation project">
+            <div class="project-card">
+              <div class="project-image-wrapper">
+                <img src="images\\Cabbeen.jpg" alt="Shoplot Renovation" class="project-image">
+                <div class="project-overlay">
+                  <p class="text-white fs-5 fw-bold">Shoplot Renovation</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
         
         <div class="col-md-4 mb-4">
-          <div class="project-card">
-            <div class="project-image-wrapper">
-              <img src="images\TzuChi.jpg" alt="Community Space Renovation" class="project-image">
-              <div class="project-overlay">
-                <p class="text-white fs-5 fw-bold">Community Space Renovation</p>
+          <a class="project-card-link" href="our-work.html#project-tzuchi" aria-label="View Tzu Chi community space renovation project">
+            <div class="project-card">
+              <div class="project-image-wrapper">
+                <img src="images\\TzuChi.jpg" alt="Community Space Renovation" class="project-image">
+                <div class="project-overlay">
+                  <p class="text-white fs-5 fw-bold">Community Space Renovation</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <p class="text-center mt-4"><a href="our-work.html" class="btn-primary-custom">VIEW FULL PORTFOLIO</a></p>
@@ -127,5 +170,90 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-hero-coverflow]');
+      if (!root) return;
+
+      const stage = root.querySelector('[data-hero-coverflow-stage]');
+      const slides = Array.from(root.querySelectorAll('[data-hero-coverflow-slide]'));
+      const prevBtn = root.querySelector('[data-hero-coverflow-prev]');
+      const nextBtn = root.querySelector('[data-hero-coverflow-next]');
+      if (!stage || slides.length < 2) return;
+
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const intervalMs = 4500;
+      let index = 0;
+      let timer = null;
+
+      function mod(n, m) {
+        return ((n % m) + m) % m;
+      }
+
+      function apply() {
+        const n = slides.length;
+        const active = mod(index, n);
+        const prev = mod(active - 1, n);
+        const next = mod(active + 1, n);
+
+        for (let i = 0; i < n; i++) {
+          const el = slides[i];
+          el.classList.remove(
+            'is-active',
+            'is-prev',
+            'is-next',
+            'is-hidden-left',
+            'is-hidden-right'
+          );
+
+          if (i === active) el.classList.add('is-active');
+          else if (i === prev) el.classList.add('is-prev');
+          else if (i === next) el.classList.add('is-next');
+          else {
+            const dist = mod(i - active, n);
+            el.classList.add(dist < n / 2 ? 'is-hidden-right' : 'is-hidden-left');
+          }
+        }
+      }
+
+      function stop() {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      }
+
+      function start() {
+        if (prefersReduced) return;
+        stop();
+        timer = window.setInterval(function () {
+          index += 1;
+          apply();
+        }, intervalMs);
+      }
+
+      function go(delta) {
+        index += delta;
+        apply();
+        start();
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { go(-1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { go(1); });
+
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      root.addEventListener('focusin', stop);
+      root.addEventListener('focusout', start);
+
+      // Keyboard support when focused
+      root.setAttribute('tabindex', '0');
+      root.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      });
+
+      apply();
+      start();
+    })();
+  </script>
 </body>
 </html>
