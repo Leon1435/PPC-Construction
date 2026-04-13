@@ -209,25 +209,6 @@ body {
   margin-top: 0.9rem;
 }
 
-.hero-coverflow__project-name {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 5.1rem;
-  z-index: 4;
-  padding: 0.5rem 1.15rem;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  pointer-events: none;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
 /* Homepage featured projects: make entire card clickable */
 .project-card-link {
   display: block;
@@ -1056,6 +1037,28 @@ body {
       transform 0.6s var(--ease-out) 0.08s,
       opacity 0.4s ease 0.05s;
   }
+
+/* Privacy policy: stagger policy blocks when section reveals */
+body.js-motion .policy-block {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s var(--ease-out),
+    transform 0.55s var(--ease-out);
+}
+
+body.js-motion .motion-section.motion-in .policy-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.js-motion .motion-section.motion-in .policy-block:nth-of-type(1) { transition-delay: 0.06s; }
+body.js-motion .motion-section.motion-in .policy-block:nth-of-type(2) { transition-delay: 0.12s; }
+body.js-motion .motion-section.motion-in .policy-block:nth-of-type(3) { transition-delay: 0.18s; }
+body.js-motion .motion-section.motion-in .policy-block:nth-of-type(4) { transition-delay: 0.24s; }
+body.js-motion .motion-section.motion-in .policy-block:nth-of-type(5) { transition-delay: 0.30s; }
+body.js-motion .motion-section.motion-in .policy-block:nth-of-type(6) { transition-delay: 0.36s; }
+body.js-motion .motion-section.motion-in .policy-block:nth-of-type(7) { transition-delay: 0.42s; }
 }
 
 @media (prefers-reduced-motion: reduce) {
